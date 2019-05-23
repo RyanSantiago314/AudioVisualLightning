@@ -76,5 +76,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissiveColor: {r: 0.79441714, g: 0.6808938, b: 1.8049003, a: 0.5}
+    - _EmissiveColor: {r: 0.5268886, g: 0.50833845, b: 0.7450828, a: 0.5}
     - _EmmisiveColor: {r: 0.92156863, g: 0.4, b: 1, a: 0.28235295}
