@@ -5,7 +5,7 @@ Shader "CM163/LightningParticles"
     Properties
     {
         _EmissiveColor("Emissive Color", Color) = (1, 1, 1, 1)
-        _Emissiveness("Emissiveness", Range(0,10)) = 0
+        _Emissiveness("Emissiveness", Range(0,3)) = 0
         _MainTex ("Texture", 2D) = "white" {}
     }
     
@@ -69,7 +69,7 @@ Shader "CM163/LightningParticles"
                 
                 float4 texColor = tex2D(_MainTex, i.uv);
                 //FINAL COLOR OF FRAGMENT
-                return float4(_EmissiveColor * _Emissiveness)*texColor;
+                return float4(_EmissiveColor * _Emissiveness)*(texColor);
  
             }
             

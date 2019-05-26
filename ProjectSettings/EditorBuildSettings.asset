@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LightningShow.unity
+    guid: 663cbfc6af46fc947b25f01a066b1461
   m_configObjects: {}

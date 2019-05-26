@@ -21,6 +21,8 @@ public class LightningController : MonoBehaviour
     public ParticleSystem LightningDupe;
     public ParticleSystem BigBolt;
 
+    bool colorChange = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,38 +61,64 @@ public class LightningController : MonoBehaviour
         }
 
         var em = Lightning.emission;
-        em.rateOverTime = 15 * aveMag[0];
+        em.rateOverTime = 25 * aveMag[0];
 
         var main = Lightning.main;
         main.startSpeed = 90 * aveMag[1];
 
         if (aveMag[4] > .8f)
-            LightningDupe.Play();
+            LightningDupe.Emit(5);
 
         if (aveMag[5] > .8f)
-            BigBolt.Play();
+            BigBolt.Emit(1);
 
-        Flash.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], .5f));
-        SkyFlash.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], .5f));
-        Bolt.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], 1.0f));
-        Spark.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], 1.0f));
+        if (colorChange)
+        {
+            Flash.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[0], aveMag[1], .5f));
+            SkyFlash.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[0], aveMag[1], .5f));
+            Bolt.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[0], aveMag[1], 1.0f));
+            Spark.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[0], aveMag[1], 1.0f));
 
-        DupeFlash.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[0], aveMag[1], .5f));
-        DupeBolt.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[0], aveMag[1], 1.0f));
-        DupeSpark.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[0], aveMag[1], 1.0f));
+            DupeFlash.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[1], aveMag[0], .5f));
+            DupeBolt.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[1], aveMag[0], 1.0f));
+            DupeSpark.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[1], aveMag[0], 1.0f));
 
-        SingleFlash.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[2], .5f));
-        SingleBolt.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[2], 1.0f));
-        SingleSpark.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[2], 1.0f));
+            SingleFlash.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[0], .5f));
+            SingleBolt.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[0], 1.0f));
+            SingleSpark.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[0], 1.0f));
+        }
+        else
+        {
+            Flash.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], .4f));
+            SkyFlash.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], .5f));
+            Bolt.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], 1.0f));
+            Spark.SetColor("_EmissiveColor", new Color(aveMag[1], aveMag[2], aveMag[0], 1.0f));
+
+            DupeFlash.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[0], aveMag[1], .4f));
+            DupeBolt.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[0], aveMag[1], 1.0f));
+            DupeSpark.SetColor("_EmissiveColor", new Color(aveMag[2], aveMag[0], aveMag[1], 1.0f));
+
+            SingleFlash.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[2], .4f));
+            SingleBolt.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[2], 1.0f));
+            SingleSpark.SetColor("_EmissiveColor", new Color(aveMag[0], aveMag[1], aveMag[2], 1.0f));
+        }
 
         Bolt.SetFloat("_Emissiveness", aveMag[3]*.35f);
+        Flash.SetFloat("_Emissiveness", aveMag[3] * .3f);
         SkyFlash.SetFloat("_Emissiveness", aveMag[3]*.07f);
 
-        DupeBolt.SetFloat("_Emissiveness", aveMag[3] * .4f);
+        DupeBolt.SetFloat("_Emissiveness", aveMag[3] * .35f);
+        DupeFlash.SetFloat("_Emissiveness", aveMag[3] * .3f);
         DupeSpark.SetFloat("_Emissiveness", aveMag[3] * .5f);
 
-        SingleBolt.SetFloat("_Emissiveness", aveMag[3] * .4f);
+        SingleBolt.SetFloat("_Emissiveness", aveMag[3] * .35f);
+        SingleFlash.SetFloat("_Emissiveness", aveMag[3] * .3f);
         SingleSpark.SetFloat("_Emissiveness", aveMag[3] * .5f);
 
+    }
+
+    public void ColorSwitch()
+    {
+        colorChange = !colorChange;
     }
 }
